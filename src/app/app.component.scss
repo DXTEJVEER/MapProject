@@ -1,0 +1,11 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll {
+  overflow: auto;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  background-color: #7f5b10;
+}

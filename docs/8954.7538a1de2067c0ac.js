@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbeachSports=self.webpackChunkbeachSports||[]).push([[8954],{78954:(n,s,_)=>{_.r(s),_.d(s,{build:()=>e.b}),_(6067),_(39704),_(84178),_(17625),_(63123),_(46524),_(22355),_(16396);var e=_(5585)}}]);

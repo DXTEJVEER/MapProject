@@ -1,0 +1,1619 @@
+<div id="map">
+  <router-outlet></router-outlet>
+</div>
+
+<div id="toggler" class="topbar" [class.active]="!menuToggle">
+  <img class="logo" src="assets/img/logo.png" alt="" [routerLink]="['/3dMap']" [queryParams]="{ game: 'all'}"
+    style="cursor: pointer" />
+  <div class="menu">
+    <div class="custom-control custom-switch pr-3" style="display:flex;justify-content:center;align-items:center;">
+      <input type="checkbox" class="custom-control-input" id="customSwitches" [checked]=isDark
+        (change)="onCheckboxChange($event)">
+      <label class="custom-control-label" for="customSwitches">Dark Mode</label>
+    </div>
+    <!-- <div class="btn-group btn-group-toggle mr-2" data-toggle="buttons">
+      <label class="btn btn-primary active">
+        <input type="radio" name="options" id="light" checked  /> Light
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" id="dark" /> Dark
+      </label>
+    </div> -->
+
+    <!-- <div class="search-bar">
+      <input type="text" placeholder="Search Location..." autocomplete="off" />
+      <img class="icon" src="assets/img/search.svg" alt="" />
+    </div> -->
+    <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'all'}">
+      <img src="assets/img/home.svg" alt="" />
+    </a>
+    <a href="#">
+      <img src="assets/img/full-screen.svg" alt="" />
+    </a>
+  </div>
+</div>
+
+<div id="sidenav">
+  <ul>
+    <li>
+      <a href="javascript:void(0)" (click)="menuToggle = !menuToggle">
+        <img src="assets/img/menu.svg" alt="" />
+      </a>
+    </li>
+  </ul>
+  <ul class="scroll">
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'basketball'}" [class.active]="selectedSport == 'basketball'"
+        (click)="selectSports('basketball')">
+        <img src="assets/img/basketball.png" alt="" />
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'badminton'}" [class.active]="selectedSport == 'badminton'"
+        (click)="selectSports('badminton')">
+        <img src="assets/img/badminton.png" alt="" />
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'boxing'}" [class.active]="selectedSport == 'Boxing'"
+        (click)="selectSports('Boxing')">
+        <img src="assets/img/Boxing.png" alt="" />
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'baseball'}" [class.active]="selectedSport == 'Baseball'"
+        (click)="selectSports('Baseball')">
+        <img src="assets/img/Baseball.png" alt="" />
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'football'}" [class.active]="selectedSport == 'football'"
+        (click)="selectSports('football')">
+        <img src="assets/img/football.png" alt="" />
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'swimming'}" [class.active]="selectedSport == 'swimming'"
+        (click)="selectSports('swimming')">
+        <img src="assets/img/swimming.png" alt="" />
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'jetski'}" [class.active]="selectedSport == 'jetski'"
+        (click)="selectSports('jetski')">
+        <img src="assets/img/jetski.png" alt="" />
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'golf'}" [class.active]="selectedSport == 'golf'"
+        (click)="selectSports('golf')">
+        <img src="assets/img/golf.png" alt="" />
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'cycle'}" [class.active]="selectedSport == 'cycle'"
+        (click)="selectSports('cycle')">
+        <img src="assets/img/cycling.png" alt="" />
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'billiard'}" [class.active]="selectedSport == 'billiard'"
+        (click)="selectSports('billiard')">
+        <img src="assets/img/snookr.png" alt="" />
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'tennis'}" [class.active]="selectedSport == 'Tennis'"
+        (click)="selectSports('Tennis')">
+        <img src="assets/img/tennis.png" alt="" />
+      </a>
+    </li>
+    <!-- <li>
+=======
+    <ul>
+        <li>
+            <a href="javascript:void(0)" (click)="menuToggle = !menuToggle">
+                <img src="assets/img/menu.svg" alt="">
+            </a>
+        </li>
+    </ul>
+    <ul class="scroll">
+        <li>
+            <a [routerLink]="['/here', 'basketball']" [class.active]="selectedSport == 'basketball'"
+                (click)="selectSports('basketball')">
+                <img src="assets/img/basketball.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'badminton']" [class.active]="selectedSport == 'badminton'"
+                (click)="selectSports('badminton')">
+                <img src="assets/img/badminton.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'boxing']" [class.active]="selectedSport == 'Boxing'" (click)="selectSports('Boxing')">
+                <img src="assets/img/Boxing.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'baseball']" [class.active]="selectedSport == 'Baseball'" (click)="selectSports('Baseball')">
+                <img src="assets/img/Baseball.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'cycle']" [class.active]="selectedSport == 'cycle'" (click)="selectSports('cycle')">
+                <img src="assets/img/cycling.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'billiard']" [class.active]="selectedSport == 'billiard'" (click)="selectSports('billiard')">
+                <img src="assets/img/snookr.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'football']" [class.active]="selectedSport == 'football'"
+                (click)="selectSports('football')">
+                <img src="assets/img/football.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'swimming']" [class.active]="selectedSport == 'swimming'"
+                (click)="selectSports('swimming')">
+                <img src="assets/img/swimming.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'golf']" [class.active]="selectedSport == 'golf'" (click)="selectSports('golf')">
+                <img src="assets/img/golf.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'tennis']" [class.active]="selectedSport == 'Tennis'"
+                (click)="selectSports('Tennis')">
+                <img src="assets/img/tennis.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'jetski']" [class.active]="selectedSport == 'jetski'" (click)="selectSports('jetski')">
+                <img src="assets/img/jetski.png" alt="">
+            </a>
+        </li>
+       <li>
+>>>>>>> ff0e3451381a0916cf52dfe0b85a22f25924ab4b
+            <a [routerLink]="['/here', 'chess']" [class.active]="selectedSport == 'Chess'" (click)="selectSports('Chess')">
+                <img src="assets/img/Chess.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'cricket']" [class.active]="selectedSport == 'Cricket'" (click)="selectSports('Cricket')">
+                <img src="assets/img/Cricket.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'tableTennis']" [class.active]="selectedSport == 'tableTennis'" (click)="selectSports('tableTennis')">
+                <img src="assets/img/Table tennis.png" alt="">
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'gymming']" [class.active]="selectedSport == 'gymming'" (click)="selectSports('gymming')">
+                <img src="assets/img/Gymming.png" alt="">
+            </a>
+        </li> -->
+  </ul>
+  <ul>
+    <li>
+      <a href="javascript:void(0)">
+        <img src="assets/img/user.svg" alt="" />
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'basketball'">
+  <div class="multi-header">
+    <h2>Basketball Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of basketballDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'basketball', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/basketball/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'basketball']"
+        [queryParams]="{ lat: '25.1160624999999', lng: '55.2268124999999' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/aktiv.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Aktiv Nation</h3>
+          <p>
+            10th St - Al Quoz - Al Quoz Industrial Area 4 - Dubai - United Arab
+            Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'basketball']"
+        [queryParams]="{ lat: '25.2689374999999', lng: '55.3184375' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Barsha.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al ghurair roof top basketball court</h3>
+          <p>2 20 St - Deira - Dubai - United Arab Emirates.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'basketball']"
+        [queryParams]="{ lat: '25.141060197155184', lng: '55.25139917870856' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Khail.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Khail Basketball Court</h3>
+          <p>
+            47R2+3H3 - Al Quoz - Al Quoz Industrial Area 2 - Dubai - United Arab
+            Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'basketball']"
+        [queryParams]="{ lat: '25.2418125', lng: '55.3115624999999' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Naser.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Naser Basketball Court</h3>
+          <p>27 10th St - Oud Metha - Dubai - United Arab Emirates.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'basketball']"
+        [queryParams]="{ lat: '25.24288287397788', lng: '55.31254199008932' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Naser1.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Nasr Basketball Court 1</h3>
+          <p>68V6+4WW - Oud Metha - Dubai - United Arab Emirates.</p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'badminton'">
+  <div class="multi-header">
+    <h2>Badminton Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of badmintonDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'badminton', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/badminton/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'badminton']"
+        [queryParams]="{ lat: '25.312624951420943', lng: '55.443173340090276' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Adaa.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Adaa Al Aali Sport Centre LLC</h3>
+          <p>Â· Warehouse #18.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'badminton']"
+        [queryParams]="{ lat: '25.329254828662407', lng: '55.422247980963576' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Masah.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Masah Sports Center</h3>
+          <p>Sports complex.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'badminton']"
+        [queryParams]="{ lat: '25.26457445398281', lng: '55.28766604008985' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Saqer.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Saqer Alsarea Badminton Training</h3>
+          <p>Â· Food Court - Next to KFC - Al Shnidagha City Center.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'badminton']"
+        [queryParams]="{ lat: '25.251042310271053', lng: '55.39479913059093' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Twar.JPG)"
+        ></div>
+        <div class="desc">
+          <h3>Al Twar Sports Hall</h3>
+          <p>Â· Al Twar 3.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'badminton']"
+        [queryParams]="{ lat: '25.291773321095384', lng: '55.349416598781985' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/AlShabab.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>AlShabab AlArabi</h3>
+          <p>Club Â· 78RX+GQ7 - Al mamzar.</p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'football'">
+  <div class="multi-header">
+    <h2>Football Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of footballDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'football', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/football/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'football']"
+        [queryParams]="{ lat: '25.27848901647862', lng: '55.366571797760194' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/AFA-FTI.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>AFA FTI DUBAI - Al Qusais</h3>
+          <p>32-38 5th St - Al QusaisAl Qusais 1 - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'football']"
+        [queryParams]="{ lat: '25.242246222553494', lng: '55.34637070103587' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Ahdaaf.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Ahdaaf Sports Club - Al Garhoud</h3>
+          <p>68QW+C83 - 17 5th St - Garhoud - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'football']"
+        [queryParams]="{ lat: '25.17753809559027', lng: '55.421924594311506' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/AHDAAF1.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Ahdaaf Sports Club - Dragon Mart 2</h3>
+          <p>Ras Al Khor Rd - E44 - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'football']"
+        [queryParams]="{ lat: '25.131501147973772', lng: '55.24084711703753' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Ahdaaf2.jfif)"
+        ></div>
+        <div class="desc">
+          <h3>AHDAAF SPORTS CLUB - ALQOUZ</h3>
+          <p>18B St - Al Quoz - Al Quoz Industrial Area 2 - Dubai.</p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'Boxing'">
+  <div class="multi-header">
+    <h2>Boxing Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of boxingDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'boxing', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/boxing/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'boxing']"
+        [queryParams]="{ lat: '25.1395624999999', lng: '55.2035624999999' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/9ROUND.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>9ROUND</h3>
+          <p>
+            Villa No.3 - Umm Suqeim - Umm Suqeim 3 - Dubai - United Arab
+            Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'boxing']"
+        [queryParams]="{ lat: '25.1190624999999', lng: '55.2210625' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Areen.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Areen Martial Arts</h3>
+          <p>
+            Street No 28B, Al Quoz Industrial 3 Besides Rentflex Car Rental,
+            Makani No: 2065479313 - Dubai - United Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'boxing']"
+        [queryParams]="{ lat: '25.1236874999999', lng: '55.3728124999999' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/ATTOE-Boxing.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>ATTOE Boxing CLUB FZE Dubai</h3>
+          <p>
+            Shop 7, Al Zarooni Building - Dubai Silicon Oasis - Dubai - United
+            Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'boxing']"
+        [queryParams]="{ lat: '25.1170624999999', lng: '55.1364374999999' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Black-Box.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Black Box Gym</h3>
+          <p>Palm Jumeirah Palm Views East - Dubai - United Arab Emirates.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'boxing']"
+        [queryParams]="{ lat: '25.188574617781672', lng: '55.27792676892411' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Boxing-kick.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Boxing kick boxing Krav Maga fitness coach</h3>
+          <p>
+            57qh+85j - Downtown Dubai - South Ridge - Dubai - United Arab
+            Emirates.
+          </p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'Baseball'">
+  <div class="multi-header">
+    <h2>Baseball Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of baseballDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'baseball', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/baseball/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'baseball']"
+        [queryParams]="{ lat: '25.278510091847338', lng: '55.36648679696255' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Dubai-Little1.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>ملعب يوفنتوس</h3>
+          <p>36 5th St - Al Qusais - Al Qusais 1 - Dubai.</p>
+        </div>
+      </a>
+    </li> -->
+    <!-- <li>
+            <a href="#">
+                <div class="image" style="background-image: url(assets/img/loc.png)"></div>
+                <div class="desc">
+                    <h3>Ahdaaf Sports Club - Al Garhoud</h3>
+                    <p>68QW+C83 - 17 5th St - Garhoud - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <div class="image" style="background-image: url(assets/img/loc.png)"></div>
+                <div class="desc">
+                    <h3>AHDAAF SPORTS CLUB - ALQOUZ</h3>
+                    <p>18B St - Al Quoz - Al Quoz Industrial Area 2 - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <div class="image" style="background-image: url(assets/img/loc.png)"></div>
+                <div class="desc">
+                    <h3>Aktiv Nation</h3>
+                    <p>10th St - Al Quoz - Al Quoz Industrial Area 4 - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <div class="image" style="background-image: url(assets/img/loc.png)"></div>
+                <div class="desc">
+                    <h3>Al Moharb, The Warrior Cricket Academy</h3>
+                    <p>Oud Metha - Bur Dubai - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <div class="image" style="background-image: url(assets/img/loc.png)"></div>
+                <div class="desc">
+                    <h3>Al Nasr Club</h3>
+                    <p>11th St - Oud Metha - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li> -->
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'swimming'">
+  <div class="multi-header">
+    <h2>Swimming Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of swimmingDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'swimming', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/swimming/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'swimming']"
+        [queryParams]="{ lat: '25.2081874999999', lng: '55.2719375' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Absolute.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Absolute Swimming Academy - Shangril-la</h3>
+          <p>
+            Shangri-la Hotel Dubai Sheikh Zayed Rd, Near Financial Metro Station
+            - Dubai - United Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'swimming']"
+        [queryParams]="{ lat: '25.2368125', lng: '55.3118124999999' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/Al-asr-Leisureland.jpg);
+          "
+        ></div>
+        <div class="desc">
+          <h3>Al Nasr Leisureland</h3>
+          <p>
+            Behind American Hospital - Oud Metha - Dubai - United Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'swimming']"
+        [queryParams]="{ lat: '25.0011875', lng: '55.2530624999999' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Ramth.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Ramth swimming pool 2</h3>
+          <p>Unnamed Road - Dubai - United Arab Emirates.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'swimming']"
+        [queryParams]="{ lat: '25.218978337583298', lng: '55.31704563579274' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Wasl.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Wasl Swimming pool</h3>
+          <p>6888+QWJ - Al Jaddaf - Dubai - United Arab Emirates.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'swimming']"
+        [queryParams]="{ lat: '40.873969297381656', lng: '-79.92991977134257' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Alama-Pool.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Alama Pool</h3>
+          <p>
+            3728+XPR - Arabian Ranches - Alma - Dubai - United Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'swimming']"
+        [queryParams]="{ lat: '25.2089374999999', lng: '55.2724375' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Angel-Sports.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Angel Sports Services - Swimming Club</h3>
+          <p>
+            Aspin Commercial Tower - Sheikh Zayed Rd - Trade Centre - Trade
+            Centre 1 - Dubai - United Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'jetski'">
+  <div class="multi-header">
+    <h2>JetSki Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of jetskiDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'jetski', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/jetski/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'jetski']"
+        [queryParams]="{ lat: '25.17300746045953', lng: '55.213563701490784' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/jetski/Al-Qubtan.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Qubtan Water Sport Dubai</h3>
+          <p>jumierah 2 - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'jetski']"
+        [queryParams]="{ lat: '25.153143910064806', lng: '55.19878308152' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/jetski/AMINE.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>AMINE JETSKI DUBAI</h3>
+          <p>Jumeirah St - Umm Suqeim - Jumeirah 3 - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'jetski']"
+        [queryParams]="{ lat: '25.214538592699306', lng: '55.24420733294849' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/jetski/Amwaj-Al.jfif)"
+        ></div>
+        <div class="desc">
+          <h3>Amwaj Al Bahar Water Sport Centre</h3>
+          <p>Jumeirah - Jumeirah 2 - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'jetski']"
+        [queryParams]="{ lat: '25.210266701351355', lng: '55.24406905248177' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/jetski/Aquablue-Jet.jpg);
+          "
+        ></div>
+        <div class="desc">
+          <h3>Aquablue Jet ski Dubai</h3>
+          <p>Jumeira 1 P & O Marinas Fishing Harbour,Dubai - Dubai.</p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'golf'">
+  <div class="multi-header">
+    <h2>Golf Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of golfDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'golf', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/golf/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'golf']"
+        [queryParams]="{ lat: '25.067887286574067', lng: '55.16448836679086' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/golf/Montgomerie.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Montgomerie Golf Club Dubai, Emirates Hills</h3>
+          <p>Address Montgomerie - Emirates Hills - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'golf']"
+        [queryParams]="{ lat: '25.24194479838908', lng: '55.333525197759776' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/golf/Dubai-Creek.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Dubai Creek Golf & Yacht Club</h3>
+          <p>Dubai Creek Resort - Port Saeed - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'golf']"
+        [queryParams]="{ lat: '25.121254914238474', lng: '55.263866076894615' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/golf/Dubai-Hills.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Dubai Hills Golf Club</h3>
+          <p>Dubai Hills Estate - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'golf']"
+        [queryParams]="{ lat: '25.085509521101287', lng: '55.15988101309851' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/golf/Emirates-Golf.jpg);
+          "
+        ></div>
+        <div class="desc">
+          <h3>Emirates Golf Club</h3>
+          <p>
+            17/2, Al Naseem street Emirates Golf Club, Al Thanyah 3, Hadaeq
+            Mohammed Bin Rashid, Dubai - Dubai.
+          </p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+
+  <div class="multi-header">
+    <h2>Golf Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of golfDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'golf', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/golf/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'golf']"
+        [queryParams]="{ lat: '25.2000625', lng: '55.2753125' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/golf/Falcon.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Falcon Golf Arabia FZ LLC</h3>
+          <p>
+            Tower 1 Sheikh Mohammed bin Rashid Blvd - Downtown Dubai - Dubai -
+            United Arab Emirates
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'golf']"
+        [queryParams]="{ lat: '25.067887286574067', lng: '55.16448836679086' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/golf/Montgomerie.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Montgomerie Golf Club Dubai, Emirates Hills</h3>
+          <p>Address Montgomerie - Emirates Hills - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'golf']"
+        [queryParams]="{ lat: '25.24194479838908', lng: '55.333525197759776' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/golf/Dubai-Creek.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Dubai Creek Golf & Yacht Club</h3>
+          <p>Dubai Creek Resort - Port Saeed - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'golf']"
+        [queryParams]="{ lat: '25.121254914238474', lng: '55.263866076894615' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/golf/Dubai-Hills.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Dubai Hills Golf Club</h3>
+          <p>Dubai Hills Estate - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'golf']"
+        [queryParams]="{ lat: '25.085509521101287', lng: '55.15988101309851' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/golf/Emirates-Golf.jpg);
+          "
+        ></div>
+        <div class="desc">
+          <h3>Emirates Golf Club</h3>
+          <p>
+            17/2, Al Naseem street Emirates Golf Club, Al Thanyah 3, Hadaeq
+            Mohammed Bin Rashid, Dubai - Dubai.
+          </p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'cycle'">
+  <div class="multi-header">
+    <h2>Cycling Track</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of cyclingDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'cycle', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/cycle/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'cycle']"
+        [queryParams]="{ lat: '24.853985331655814', lng: '55.3458911984373' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/cycle/Al-Qudra.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Qudra Track</h3>
+          <p>Address Montgomerie - Emirates Hills - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'cycle']"
+        [queryParams]="{ lat: '25.172250', lng: '55.271944' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/cycle/Dubai-Canal.jpg);
+          "
+        ></div>
+        <div class="desc">
+          <h3>Dubai Canal Track</h3>
+          <p>Dubai Creek Resort - Port Saeed - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'cycle']"
+        [queryParams]="{ lat: '25.084944', lng: '55.147917' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/cycle/Dubai-Marina.jpg);
+          "
+        ></div>
+        <div class="desc">
+          <h3>Dubai Marina</h3>
+          <p>Dubai Hills Estate - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'cycle']"
+        [queryParams]="{ lat: '25.218083', lng: '55.250806' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/cycle/Jumeira-Street.jfif);
+          "
+        ></div>
+        <div class="desc">
+          <h3>Jumeira Street Track</h3>
+          <p>17/2, Al Naseem street Emirates Golf Club, Al Thanyah 3, Hadaeq Mohammed Bin Rashid, Dubai - Dubai.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'cycle']"
+        [queryParams]="{ lat: '25.239500', lng: '55.473167' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/cycle/Khawaneej-Track.jpg);
+          "
+        ></div>
+        <div class="desc">
+          <h3>Khawaneej Track</h3>
+          <p>17/2, Al Naseem street Emirates Golf Club, Al Thanyah 3, Hadaeq Mohammed Bin Rashid, Dubai - Dubai.</p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'billiard'">
+  <div class="multi-header">
+    <h2>Billiard Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of billiardDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'billiard', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/billiard/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'billiard']"
+        [queryParams]="{ lat: '25.1095624999999', lng: '55.2029374999999' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/billiard/23rd-Street.jpg);
+          "
+        ></div>
+        <div class="desc">
+          <h3>23rd Street Sports House</h3>
+          <p>
+            Grandeur Hotel, 23rd street, Near Mall Of The Emirates - Al Barsha 1
+            - Dubai - United Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'billiard']"
+        [queryParams]="{ lat: '25.2899374999999', lng: '55.3658124999999' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/billiard/7Degree.jfif);
+          "
+        ></div>
+        <div class="desc">
+          <h3>7 Degree Billiards & Snooker Club</h3>
+          <p>Jumaa Aman building shop No 7 - Dubai - United Arab Emirates.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'billiard']"
+        [queryParams]="{ lat: '25.1999375', lng: '55.2691875' }"
+      >
+        <div
+          class="image"
+          style="
+            background-image: url(assets/img/academy/billiard/Above-2.0.jpg);
+          "
+        ></div>
+        <div class="desc">
+          <h3>Above 2.0</h3>
+          <p>
+            8th Floor, Sofitel Dubai Downtown - Dubai - United Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'billiard']"
+        [queryParams]="{ lat: '25.1740624999999', lng: '55.4033125' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/billiard/Aleasa.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Aleasa Almasia Billiards</h3>
+          <p>
+            England Y11 - International City - England Cluster - Dubai - United
+            Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+<div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'Tennis'">
+  <div class="multi-header">
+    <h2>Tennis Clubs</h2>
+    <h1>Near Me</h1>
+  </div>
+  <ul class="location-list">
+    <li *ngFor="let item of tennisDetails; index as idx">
+      <a [routerLink]="['/3dMap']" [queryParams]="{ game: 'tennis', lat: item.lat, lng: item.lng }">
+        <div class="image" style="background-image: url(assets/img/academy/tennis/{{idx%4}}.jpg)"></div>
+        <div class="desc">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.address }}</p>
+        </div>
+      </a>
+    </li>
+    <!-- <li>
+      <a
+        [routerLink]="['/here', 'tennis']"
+        [queryParams]="{ lat: '25.1033124999999', lng: '55.2051874999999' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Barsha.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Barsha Pond Park Tennis Courts</h3>
+          <p>
+            25Â°06'12. 55Â°12'18. - 5 Street 1 - Dubai - United Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'tennis']"
+        [queryParams]="{ lat: '24.407306405666283', lng: '54.545788116848854' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Forsan.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Forsan</h3>
+          <p>CG4W+W83 - Khalifa City - Abu Dhabi.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'tennis']"
+        [queryParams]="{ lat: '25.1821875', lng: '55.2543124999999' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Garhoud.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Garhoud Complex tennis court</h3>
+          <p>68WW+7JJ - Garhoud - Dubai - United Arab Emirates.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'tennis']"
+        [queryParams]="{ lat: '25.1821875', lng: '55.2543124999999' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Habtoor.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Habtoor Tennis Academy</h3>
+          <p>
+            Al Habtoor City - Sheikh Zayed Rd - Dubai - United Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'tennis']"
+        [queryParams]="{ lat: '25.2683124999999', lng: '55.3181875' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-naadi.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al naadi health club-al ghurair</h3>
+          <p>10 22 A St - Deira - Dubai - United Arab Emirates.</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a
+        [routerLink]="['/here', 'tennis']"
+        [queryParams]="{ lat: '25.2368125', lng: '55.3118124999999' }"
+      >
+        <div
+          class="image"
+          style="background-image: url(assets/img/academy/Al-Nasr1.jpg)"
+        ></div>
+        <div class="desc">
+          <h3>Al Nasr Leisureland</h3>
+          <p>
+            Behind American Hospital - Oud Metha - Dubai - United Arab Emirates.
+          </p>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+<!-- <div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'Chess'">
+    <div class="multi-header">
+        <h2>Chess Clubs</h2>
+        <h1>Near Me</h1>
+    </div>
+    <ul class="location-list">
+        <li>
+            <a [routerLink]="['/here', 'chess', '25.289005199924286', '55.35016958241958']">
+                <div class="image" style="background-image: url(assets/img/academy/Dubai-Chess.jpg)"></div>
+                <div class="desc">
+                    <h3>Dubai Chess and Culture Club</h3>
+                    <p>Gate 8, Street No. 44, AL Wuhaida Road Community 134 in - Dubai.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'chess', '25.22185091523977', '55.41975872847964']">
+                <div class="image" style="background-image: url(assets/img/academy/UAE-Chess.jpg)"></div>
+                <div class="desc">
+                    <h3>UAE Chess Federation</h3>
+                    <p>60a 26 B St - Mirdif - Dubai.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'chess', '25.178670897846946', '55.244637324797765']">
+                <div class="image" style="background-image: url(assets/img/academy/OlympX-Chess.jpg)"></div>
+                <div class="desc">
+                    <h3>OlympX Chess Dubai</h3>
+                    <p> OlympX Chess Center Dubai Kia Flagship Building - Office G22 - Sheikh Zayed Rd - Dubai.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'chess', '25.139205345248243', '55.213738279455825']">
+                <div class="image" style="background-image: url(assets/img/academy/Chess-Lab.jpg)"></div>
+                <div class="desc">
+                    <h3>Chess Lab</h3>
+                    <p>46J7+GF3 - 213 A St - Al Quoz - Al Quoz Industrial Area 3 - Dubai.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'chess', '25.117447222426772', '55.183525879565934']">
+                <div class="image" style="background-image: url(assets/img/academy/International-Chess.jpeg)"></div>
+                <div class="desc">
+                    <h3>International Chess Center</h3>
+                    <p>Al Attar Business Centre - Dubai.</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div> -->
+
+<!-- <div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'Cricket'">
+    <div class="multi-header">
+        <h2>Cricket Clubs</h2>
+        <h1>Near Me</h1>
+    </div>
+    <ul class="location-list">
+        <li>
+            <a [routerLink]="['/here', 'cricket']">
+                <div class="image" style="background-image: url(assets/img/academy/7s-Cricket.jpg)"></div>
+                <div class="desc">
+                    <h3>7s Cricket Grounds</h3>
+                    <p>XFX8+QHX - شارع دبي العين - Dubai.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'cricket']">
+                <div class="image" style="background-image: url(assets/img/academy/ABDUL.jfif)"></div>
+                <div class="desc">
+                    <h3>ABDUL HADI XI Ground</h3>
+                    <p>78P8+5X9 - Deira - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'cricket']">
+                <div class="image" style="background-image: url(assets/img/academy/Ahdaaf-Sports.jpg)"></div>
+                <div class="desc">
+                    <h3>Ahdaaf Sports Club - Al Garhoud</h3>
+                    <p>68QW+C83 - 17 5th St - Garhoud - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'cricket']">
+                <div class="image" style="background-image: url(assets/img//academy/Ahdaaf.jpg)"></div>
+                <div class="desc">
+                    <h3>AHDAAF SPORTS CLUB - ALQOUZ</h3>
+                    <p>18B St - Al Quoz - Al Quoz Industrial Area 2 - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'cricket']">
+                <div class="image" style="background-image: url(assets/img/academy/aktiv.jpg)"></div>
+                <div class="desc">
+                    <h3>Aktiv Nation</h3>
+                    <p>10th St - Al Quoz - Al Quoz Industrial Area 4 - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'cricket']">
+                <div class="image" style="background-image: url(assets/img/academy/Al-Moharb.jfif)"></div>
+                <div class="desc">
+                    <h3>Al Moharb, The Warrior Cricket Academy</h3>
+                    <p>Oud Metha - Bur Dubai - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'cricket']">
+                <div class="image" style="background-image: url(assets/img/academy/Al-Nasr1.jpg)"></div>
+                <div class="desc">
+                    <h3>Al Nasr Club</h3>
+                    <p>11th St - Oud Metha - Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div> -->
+
+<!-- <div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'tableTennis'">
+    <div class="multi-header">
+        <h2>Table tennis Clubs</h2>
+        <h1>Near Me</h1>
+    </div>
+    <ul class="location-list">
+        <li>
+            <a [routerLink]="['/here', 'tableTennis', '25.0983124999999', '55.1796875']">
+                <div class="image" style="background-image: url(assets/img/academy/1stFloor.jpg)"></div>
+                <div class="desc">
+                    <h3>1st Floor, Ramee Rose Hotel Al - Dubai - United Arab Emirates</h3>
+                    <p>35XH+8V Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'tableTennis', '25.2438125', '55.3139374999999']">
+                <div class="image" style="background-image: url(assets/img/academy/5-10th-St.jfif)"></div>
+                <div class="desc">
+                    <h3>5 10th St - Oud Metha - Dubai - United Arab Emirates</h3>
+                    <p>68V7+GH Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'tableTennis', '25.1999375', '55.2691875']">
+                <div class="image" style="background-image: url(assets/img/academy/8th-Floor.jpg)"></div>
+                <div class="desc">
+                    <h3>8th Floor, Sofitel Dubai Downtown - Dubai - United Arab Emirates</h3>
+                    <p>57X9+XM Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'tableTennis', '25.2768125', '55.3456875']">
+                <div class="image" style="background-image: url(assets/img/academy/Abu-Hail-table.jpg)"></div>
+                <div class="desc">
+                    <h3>Abu Hail Road - Hor Al Anz - Dubai - United Arab Emirates</h3>
+                    <p>78GW+P7 Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'tableTennis', '25.1115624999999', '55.2034374999999']">
+                <div class="image" style="background-image: url(assets/img/academy/Al-Barsha-table.jfif)"></div>
+                <div class="desc">
+                    <h3>Al Barsha 1, Near Mall Of The Emirates - Dubai - United Arab Emirates</h3>
+                    <p>4663+J9 Dubai - United Arab Emirates.</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div> -->
+
+<!-- <div id="sidemenu" [class.active]="menuToggle" *ngIf="selectedSport == 'gymming'">
+    <div class="multi-header">
+        <h2>Gymming Clubs</h2>
+        <h1>Near Me</h1>
+    </div>
+    <ul class="location-list">
+        <li>
+            <a [routerLink]="['/here', 'gymming', '25.192396', '55.309081']">
+                <div class="image" style="background-image: url(assets/img/academy/24Fitness.jpg)"></div>
+                <div class="desc">
+                    <h3>24 Fitness Dubai</h3>
+                    <p>Al Quoz IND 1 - القوز الصناعية 1.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'gymming', '25.192396', '55.309081']">
+                <div class="image" style="background-image: url(assets/img/academy/247-Gym.jpg)"></div>
+                <div class="desc">
+                    <h3>247 Gym - The Fitness District</h3>
+                    <p>oud metha  عود ميثاء.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'gymming', '25.216765', '55.260053']">
+                <div class="image" style="background-image: url(assets/img/academy/51GYM.jpg)"></div>
+                <div class="desc">
+                    <h3>51 GYM CLUB LLC</h3>
+                    <p>Al Wasl 51 Plaza 1 Entrance - شارع الوصل.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'gymming', '25.216765', '55.260053']">
+                <div class="image" style="background-image: url(assets/img/academy/9ROUND.jpg)"></div>
+                <div class="desc">
+                    <h3>9ROUND ( boxing ) </h3>
+                    <p>Villa No.3 - ام سقيم - ام سقيم ٣ - دبي.</p>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/here', 'gymming', '25.216765', '55.260053']">
+                <div class="image" style="background-image: url(assets/img/academy/AARS.jpg)"></div>
+                <div class="desc">
+                    <h3>AARS BODYBUILDING CLUB </h3>
+                    <p>Near Today Restaurant Behind zulekha Hospital new Al Zarooni Building, Roof floor - النهدة ٢ - دبي.</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div> -->
+
+<ul class="social-icons">
+  <li>
+    <a href="#">
+      <img src="assets/img/social/facebook.png" alt="" />
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <img src="assets/img/social/instagram.png" alt="" />
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <img src="assets/img/social/link.png" alt="" />
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <img src="assets/img/social/linkedin.png" alt="" />
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <img src="assets/img/social/twitter.png" alt="" />
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <img src="assets/img/social/youtube.png" alt="" />
+    </a>
+  </li>
+</ul>
