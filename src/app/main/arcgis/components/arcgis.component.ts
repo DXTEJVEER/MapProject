@@ -66,30 +66,30 @@ export class ArcgisComponent {
   cyclingCoordinates: any = [];
   tennisCoordinates: any = [];
 
-  private badmintonhtml =
-    '<img src="assets/img/gifs/Badminton.gif" width=55px" height="50px">';
-  private baseballhtml =
-    '<img src="assets/img/gifs/Baseball.gif" width=55px" height="50px">';
-  private basketballhtml =
-    '<img src="assets/img/gifs/Basketball.gif" width=55px" height="50px">';
-  private boxinghtml =
-    '<img src="assets/img/gifs/Boxing.gif" width=55px" height="50px">';
-  private footballhtml =
-    '<img src="assets/img/gifs/Football.gif" width=55px" height="50px">';
-  private golfhtml =
-    '<img src="assets/img/gifs/Golf-2.gif" width=55px" height="50px">';
-  private jetskihtml =
-    '<img src="assets/img/gifs/Jetski.gif" width=55px" height="50px">';
-  private billiardhtml =
-    '<img src="assets/img/gifs/Snooker.gif" width=55px" height="50px" style="vertical-align:middle">';
-  private swimminghtml =
-    '<img src="assets/img/gifs/Swimming.gif" width=55px" height="50px">';
-  private cyclinghtml =
-    '<img src="assets/img/gifs/Cycling.gif" width=55px" height="50px">';
-  private paddletennishtml =
-    '<img src="assets/img/paddletennismarker.png" width=35px" height="40px">';
-  private tennishtml =
-    '<img src="assets/img/tennismarker.png" width=35px" height="45px">';
+  // private badmintonhtml =
+  //   '<img src="assets/img/gifs/Badminton.gif" width=55px" height="50px">';
+  // private baseballhtml =
+  //   '<img src="assets/img/gifs/Baseball.gif" width=55px" height="50px">';
+  // private basketballhtml =
+  //   '<img src="assets/img/gifs/Basketball.gif" width=55px" height="50px">';
+  // private boxinghtml =
+  //   '<img src="assets/img/gifs/Boxing.gif" width=55px" height="50px">';
+  // private footballhtml =
+  //   '<img src="assets/img/gifs/Football.gif" width=55px" height="50px">';
+  // private golfhtml =
+  //   '<img src="assets/img/gifs/Golf-2.gif" width=55px" height="50px">';
+  // private jetskihtml =
+  //   '<img src="assets/img/gifs/Jetski.gif" width=55px" height="50px">';
+  // private billiardhtml =
+  //   '<img src="assets/img/gifs/Snooker.gif" width=55px" height="50px" style="vertical-align:middle">';
+  // private swimminghtml =
+  //   '<img src="assets/img/gifs/Swimming.gif" width=55px" height="50px">';
+  // private cyclinghtml =
+  //   '<img src="assets/img/gifs/Cycling.gif" width=55px" height="50px">';
+  // private paddletennishtml =
+  //   '<img src="assets/img/paddletennismarker.png" width=35px" height="40px">';
+  // private tennishtml =
+  //   '<img src="assets/img/tennismarker.png" width=35px" height="45px">';
 
   // global map variables
   private map = new Map();
@@ -1857,65 +1857,6 @@ export class ArcgisComponent {
   }
   startUp() {
     esriConfig.apiKey = '';
-
-    // const buildings3DObjects = new SceneLayer({
-    //   url: 'https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/SF_BLDG_WSL1/SceneServer',
-    //   renderer: new Renderer({
-    //     type: 'simple',
-    //     symbol: {
-    //       type: 'mesh-3d',
-    //       symbolLayers: [
-    //         {
-    //           type: 'fill',
-    //           material: {
-    //             color: [255, 237, 204],
-    //             colorMixMode: 'replace',
-    //           },
-    //           edges: {
-    //             type: 'solid',
-    //             color: [133, 108, 62, 0.5],
-    //             size: 1,
-    //           },
-    //         },
-    //       ],
-    //     },
-    //   }),
-    // });
-
-    // const sceneView = new SceneView({
-    //   map: map,
-    //   camera: {
-    //     position: [-41.18215285, -86.13467977, 9321113.29449],
-    //     heading: 359.73,
-    //     tilt: 68.57,
-    //   },
-    //   viewingMode: 'local',
-
-    //   container: 'viewDiv',
-    //   qualityProfile: 'high',
-    // });
-
-    // const view = new SceneView({
-    //   map: map,
-    //   // map: webscene,
-    //   viewingMode: 'local',
-    //   camera: new Camera({
-    //     position: {
-    //       x: -118.808, //Longitude
-    //       y: 33.961, //Latitude
-    //       z: 2000, //Meters
-    //     },
-    //     tilt: 75,
-    //   }),
-    //   container: 'viewDiv',
-    //   center: [55.052, 25.244],
-    //   zoom: 12,
-    // });
-    // const webscene = new WebScene({
-    //   portalItem: {
-    //     id: '962efd58b194443ea855ed1ca69fdaf5',
-    //   },
-    // });
 
     const map = new Map({
       //basemap: 'streets-vector',
